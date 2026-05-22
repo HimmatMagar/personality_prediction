@@ -11,6 +11,8 @@ ENV/
 env.bak/
 *.env
 
+artifact*/
+
 # macOS
 .DS_Store
 

@@ -5,3 +5,8 @@ data_ingestion:
   source_url: "https://github.com/HimmatMagar/datae/raw/refs/heads/main/personality_dataset.zip"
   zip_file: artifact/data_ingestion/data.zip
   unzip_file: artifact/data_ingestion
+
+data_validation:
+  root_dir: artifact/data_validation
+  file_path: artifact/data_ingestion/personality_dataset.csv
+  status_file: artifact/data_validation/status.txt

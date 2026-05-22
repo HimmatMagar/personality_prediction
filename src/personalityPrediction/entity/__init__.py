@@ -7,3 +7,11 @@ class DataIngestionConfig:
       source_url: str
       zip_file: Path
       unzip_file: Path
+      
+
+@dataclass
+class DataValidationConfig:
+      root_dir: Path
+      status_file: Path
+      file_path: str
+      schema: dict

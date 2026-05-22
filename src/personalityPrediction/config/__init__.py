@@ -23,3 +23,16 @@ class ConfigurationManager:
                   zip_file = config.zip_file,
                   unzip_file = config.unzip_file
             )
+            
+      def get_data_validation_config(self) -> DataValidationConfig:
+            config = self.config.data_validation
+            schema = self.schema.column
+
+            create_directory([config.root_dir])
+
+            return DataValidationConfig(
+                  root_dir=config.root_dir,
+                  status_file=config.status_file,
+                  file_path=config.file_path,
+                  schema = schema
+            )

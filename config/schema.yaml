@@ -1,1 +1,8 @@
-key: value
+column:
+  time_spent_alone: float64
+  stage_fear: str
+  social_event_attendance: float64
+  going_outside: float64
+  drained_after_socializing: str
+  friends_circle_size: float64
+  post_frequency: float64
