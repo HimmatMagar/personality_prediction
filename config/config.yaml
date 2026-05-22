@@ -10,3 +10,8 @@ data_validation:
   root_dir: artifact/data_validation
   file_path: artifact/data_ingestion/personality_dataset.csv
   status_file: artifact/data_validation/status.txt
+
+
+data_transformation:
+  root_dir: artifact/data_transformation
+  file_path: artifact/data_ingestion/personality_dataset.csv
