@@ -15,3 +15,10 @@ data_validation:
 data_transformation:
   root_dir: artifact/data_transformation
   file_path: artifact/data_ingestion/personality_dataset.csv
+
+
+model_building:
+  root_dir: artifact/model_building
+  x_train_file: artifact/data_transformation/x_train.pkl
+  y_train_file: artifact/data_transformation/y_train.pkl
+  model: model.pkl

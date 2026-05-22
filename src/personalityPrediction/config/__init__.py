@@ -48,3 +48,24 @@ class ConfigurationManager:
             )
 
             return data_transformation_config
+
+      
+      def get_model_train_config(self) -> ModelBuildingConfig:
+            config = self.config.model_building
+            params = self.params.xgb
+
+            create_directory([config.root_dir])
+
+            model_train_config = ModelBuildingConfig(
+                  root_dir=config.root_dir,
+                  x_train_file_path=config.x_train_file,
+                  y_train_file_path=config.y_train_file,
+                  colsample_bytree = params.colsample_bytree,
+                  learning_rate = params.learning_rate,
+                  max_depth = params.max_depth,
+                  n_estimators = params.n_estimators,
+                  subsample = params.subsample,
+                  model=config.model,
+            )
+
+            return model_train_config
