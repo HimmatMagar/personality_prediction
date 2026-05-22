@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: personalityPrediction
+Version: 0.0.0.0
+Summary: End to End ML implementation to perdict the personality of a person
+Home-page: https://github.com/HimmatMagar/personality_prediction
+Author: HimmatMagar
+Author-email: himmatmagar007@gmail.com
+Project-URL: Bug Tracker, https://github.com/HimmatMagar/personality_prediction/issue
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: project-url
+Dynamic: summary
