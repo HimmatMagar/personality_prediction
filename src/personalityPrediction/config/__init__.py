@@ -11,3 +11,15 @@ class ConfigurationManager:
             self.schema = load_yaml_file(schema)
             
             create_directory([self.config.root_dir])
+            
+      
+      def get_data_ingetion_config(self) -> DataIngestionConfig:
+            config = self.config.data_ingestion
+            create_directory([config.root_dir])
+            
+            return DataIngestionConfig (
+                  root_dir = config.root_dir,
+                  source_url = config.source_url,
+                  zip_file = config.zip_file,
+                  unzip_file = config.unzip_file
+            )
