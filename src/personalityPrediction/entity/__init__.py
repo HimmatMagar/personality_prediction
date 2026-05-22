@@ -9,7 +9,7 @@ class DataIngestionConfig:
       unzip_file: Path
       
 
-@dataclass
+@dataclass(frozen=True)
 class DataValidationConfig:
       root_dir: Path
       status_file: Path
@@ -17,12 +17,12 @@ class DataValidationConfig:
       schema: dict
 
 
-@dataclass
+@dataclass(frozen=True)
 class DataTransformationConfig:
       root_dir: Path
       file_path: Path
 
-@dataclass
+@dataclass(frozen=True)
 class ModelBuildingConfig:
       root_dir: Path
       x_train_file_path: Path
@@ -33,3 +33,12 @@ class ModelBuildingConfig:
       n_estimators: int
       subsample: float
       model: str
+
+
+@dataclass(frozen=True)
+class ModelEvalConfig:
+      root_dir: Path
+      x_val_file_path: Path
+      y_val_file_path: Path
+      model: Path
+      metric: Path

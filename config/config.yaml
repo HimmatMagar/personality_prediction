@@ -22,3 +22,11 @@ model_building:
   x_train_file: artifact/data_transformation/x_train.pkl
   y_train_file: artifact/data_transformation/y_train.pkl
   model: model.pkl
+
+
+model_evaluation:
+  root_dir: artifact/model_evaluation
+  x_val_file: artifact/data_transformation/x_val.pkl
+  y_val_file: artifact/data_transformation/y_val.pkl
+  model: artifact/model_building/model.pkl
+  metric_file: artifact/model_evaluation/mertic.json
