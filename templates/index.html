@@ -4,298 +4,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Personality Compass | Brief Assessment</title>
+    <title>Personality Predictor | Introvert or Extrovert</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
         }
 
         body {
-            background: linear-gradient(145deg, #e9eef3 0%, #dfe4ea 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, #eef2f7 0%, #dce3ec 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
         }
 
-        /* main card – compact & crisp */
         .card {
-            max-width: 560px;
+            max-width: 720px;
             width: 100%;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.02);
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(0px);
+            transition: all 0.2s;
         }
 
         .card-header {
-            background: #ffffff;
-            padding: 1.6rem 1.8rem 0.8rem 1.8rem;
-            border-bottom: 1px solid #edeff2;
+            background: #1a2a3a;
+            padding: 1.6rem 2rem;
+            color: white;
         }
 
         .card-header h1 {
             font-size: 1.8rem;
             font-weight: 600;
             letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #3c3ed4, #7173f0);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.25rem;
         }
 
-        .badge {
+        .card-header .badge {
             display: inline-block;
-            background: #eff1fa;
-            color: #3c3ed4;
-            font-size: 0.7rem;
+            background: #4a6f8f;
+            font-size: 0.75rem;
             font-weight: 500;
             padding: 0.2rem 0.7rem;
-            border-radius: 40px;
-            margin-top: 0.3rem;
-        }
-
-        .sub {
-            color: #5b6e8c;
-            font-size: 0.85rem;
+            border-radius: 20px;
             margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        /* form spacing */
-        .form-scroll {
-            padding: 1.6rem 1.8rem 1.8rem 1.8rem;
-            background: #fff;
+        .card-header p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+
+        .form-container {
+            padding: 2rem 2rem 1.5rem;
         }
 
         .input-group {
             margin-bottom: 1.3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .input-row .input-group {
+            flex: 1;
+            margin-bottom: 0;
         }
 
         label {
-            font-size: 0.8rem;
             font-weight: 600;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
-            color: #3c4b64;
-            display: block;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.4px;
+            color: #2c3e4e;
+            margin-bottom: 0.4rem;
         }
 
-        label .light {
+        label .field-desc {
             font-weight: 400;
-            color: #7f8c9a;
             text-transform: none;
             font-size: 0.7rem;
+            color: #6c7e8f;
         }
 
         input,
-        .radio-wrapper {
-            width: 100%;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 0.8rem 1rem;
+        select {
+            background: #f9fbfd;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1.2rem;
+            padding: 0.75rem 1rem;
             font-size: 0.95rem;
-            border: 1.5px solid #e2e6ed;
-            border-radius: 20px;
-            background: #fefefe;
-            transition: all 0.2s;
             font-weight: 500;
-            color: #121826;
+            transition: 0.2s;
+            outline: none;
+            color: #0f172a;
         }
 
-        input[type="number"]:focus {
-            border-color: #7173f0;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(113, 115, 240, 0.2);
+        input:focus,
+        select:focus {
+            border-color: #5b8cbb;
+            box-shadow: 0 0 0 3px rgba(79, 114, 139, 0.2);
             background: white;
         }
 
-        /* radio group modern */
-        .radio-flex {
-            display: flex;
-            gap: 1.8rem;
-            align-items: center;
-            background: #f9fafc;
-            padding: 0.6rem 1rem;
-            border-radius: 48px;
-            border: 1px solid #e9edf2;
-        }
-
-        .radio-opt {
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .radio-opt input {
-            accent-color: #5d5fef;
-            width: 18px;
-            height: 18px;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        hr {
-            margin: 1rem 0;
-            border: none;
-            border-top: 1px solid #edf0f5;
+        .hint {
+            font-size: 0.7rem;
+            color: #6c7e8f;
+            margin-top: 0.3rem;
+            margin-left: 0.5rem;
         }
 
         button {
-            width: 100%;
-            background: #5d5fef;
+            background: #2c3e50;
+            color: white;
             border: none;
-            padding: 0.9rem 0;
+            width: 100%;
+            padding: 0.9rem;
             font-size: 1rem;
             font-weight: 600;
-            color: white;
-            border-radius: 44px;
+            border-radius: 2.5rem;
+            margin-top: 1.2rem;
             cursor: pointer;
             transition: 0.2s;
-            margin-top: 0.8rem;
-            box-shadow: 0 8px 18px -8px rgba(93, 95, 239, 0.4);
-            letter-spacing: 0.3px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background: #4a4cdb;
+            background: #1e2f3e;
             transform: scale(0.98);
-            box-shadow: 0 4px 12px rgba(93, 95, 239, 0.3);
         }
 
         button:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
-        /* custom alert — toast style */
-        .custom-toast {
+        .custom-alert {
             position: fixed;
-            bottom: 24px;
+            top: 24px;
             left: 50%;
-            transform: translateX(-50%) scale(0.95);
+            transform: translateX(-50%) scale(0.96);
             background: #1e293b;
             backdrop-filter: blur(12px);
-            background: rgba(20, 28, 38, 0.96);
+            background: rgba(20, 30, 45, 0.96);
+            border-radius: 48px;
+            padding: 0.85rem 2rem;
+            min-width: 260px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
             color: white;
-            padding: 0.9rem 1.4rem;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            z-index: 2000;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.2s ease, visibility 0s 0.25s, transform 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-left: 6px solid #f4c542;
+            letter-spacing: 0.2px;
             pointer-events: none;
-            max-width: 85vw;
-            white-space: nowrap;
         }
 
-        .custom-toast.show {
+        .custom-alert.show {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) scale(1);
-            pointer-events: auto;
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0s;
         }
 
-        .toast-icon {
-            font-size: 1.3rem;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+        .custom-alert.extrovert {
+            border-left-color: #2c8c5a;
+            background: #1f3d32;
         }
 
-        .toast-msg {
-            letter-spacing: 0.2px;
-            word-break: break-word;
-            white-space: normal;
-            max-width: 280px;
+        .custom-alert.introvert {
+            border-left-color: #608bc2;
+            background: #1e2f40;
         }
 
-        .toast-close {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 40px;
-            width: 26px;
-            height: 26px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-            margin-left: 6px;
-            transition: 0.1s;
-            pointer-events: auto;
+        .custom-alert.error-alert {
+            border-left-color: #c95a5a;
+            background: #3d2626;
         }
 
-        .toast-close:hover {
-            background: rgba(255, 255, 255, 0.35);
+        .loader {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
         }
 
-        /* error toast variant */
-        .custom-toast.error-toast {
-            background: rgba(220, 53, 69, 0.96);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 22px rgba(220, 53, 69, 0.3);
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        /* small helper */
-        .hint-note {
+        footer {
+            text-align: center;
             font-size: 0.7rem;
-            color: #8492a6;
-            margin-top: 0.25rem;
-            display: block;
+            padding: 0.9rem 1rem 1.2rem;
+            color: #7f8c8d;
+            border-top: 1px solid #eef2f6;
+            background: #fefefe;
         }
 
-        @media (max-width: 500px) {
-            body {
-                padding: 1rem;
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 1.5rem;
             }
 
-            .form-scroll {
-                padding: 1.3rem;
+            .input-row {
+                flex-direction: column;
+                gap: 0;
             }
 
-            .card-header {
-                padding: 1.2rem 1.3rem 0.5rem;
+            .input-row .input-group {
+                margin-bottom: 1rem;
             }
 
-            .radio-flex {
-                gap: 1rem;
-                flex-wrap: wrap;
-                border-radius: 28px;
-            }
-
-            .custom-toast {
-                white-space: normal;
-                width: auto;
-                border-radius: 32px;
-                padding: 0.8rem 1.2rem;
-                bottom: 16px;
+            .card-header h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -305,271 +249,318 @@
 
     <div class="card">
         <div class="card-header">
-            <h1>personality<span style="font-weight:400">·compass</span></h1>
-            <div class="badge">⚡ big5 inspired · 2 min</div>
-            <div class="sub"><span>🔍</span> quick traits: introvert ↔ extravert</div>
+            <h1>Personality Compass</h1>
+            <div class="badge">AI Behavior Analysis</div>
+            <p>Complete the form below to determine if your traits align with Introvert or Extrovert pattern.</p>
         </div>
 
-        <div class="form-scroll">
-            <form id="predictionForm" method="post" action="http://localhost:8000/predict">
-                <!-- Time spent alone -->
+        <div class="form-container">
+            <form id="predictionForm">
                 <div class="input-group">
-                    <label>🕒 alone time <span class="light">(hours/day, by choice)</span></label>
-                    <input type="number" step="any" name="time_spent_alone" min="0" max="24" placeholder="e.g., 3.5"
-                        required>
+                    <label>TIME SPENT ALONE <span class="field-desc">(hours per day)</span></label>
+                    <input type="number" step="any" id="time_spent_alone" name="time_spent_alone"
+                        placeholder="e.g., 5.5" required>
+                    <div class="hint">Positive number greater than 0</div>
                 </div>
 
-                <!-- stage fear: radio -->
-                <div class="input-group">
-                    <label>🎤 stage nerves <span class="light">anxious when speaking to group?</span></label>
-                    <div class="radio-flex">
-                        <label class="radio-opt">
-                            <input type="radio" name="stage_fear" value="yes" required> <span>Yes 😰</span>
-                        </label>
-                        <label class="radio-opt">
-                            <input type="radio" name="stage_fear" value="no"> <span>No 😌</span>
-                        </label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>STAGE FEAR</label>
+                        <select id="stage_fear" required>
+                            <option value="" disabled selected>-- Select --</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>DRAINED AFTER SOCIALIZING</label>
+                        <select id="drained_after_socializing" required>
+                            <option value="" disabled selected>-- Select --</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- social event attendance per month -->
-                <div class="input-group">
-                    <label>📅 social events <span class="light">(attendance per month)</span></label>
-                    <input type="number" step="any" name="social_event_attendance" min="0" max="100"
-                        placeholder="0 – 30+" required>
-                </div>
-
-                <!-- going outside -->
-                <div class="input-group">
-                    <label>🌿 going outside <span class="light">(non-essential outings, 0–100 scale)</span></label>
-                    <input type="number" step="any" name="going_outside" min="0" max="100" placeholder="frequency score"
-                        required>
-                </div>
-
-                <!-- drained after socializing -->
-                <div class="input-group">
-                    <label>⚡ emotionally drained <span class="light">after spending time with people?</span></label>
-                    <div class="radio-flex">
-                        <label class="radio-opt">
-                            <input type="radio" name="drained_after_socializing" value="yes" required> <span>Yes, I
-                                recharge alone</span>
-                        </label>
-                        <label class="radio-opt">
-                            <input type="radio" name="drained_after_socializing" value="no"> <span>No, I gain
-                                energy</span>
-                        </label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>SOCIAL EVENT ATTENDANCE <span class="field-desc">(events per month)</span></label>
+                        <input type="number" step="any" id="social_event_attendance" placeholder="e.g., 4.0" required>
+                    </div>
+                    <div class="input-group">
+                        <label>GOING OUTSIDE <span class="field-desc">(days per week)</span></label>
+                        <input type="number" step="any" id="going_outside" placeholder="e.g., 4" required>
                     </div>
                 </div>
 
-                <!-- close friends circle size -->
-                <div class="input-group">
-                    <label>👥 close friends <span class="light">(talk regularly)</span></label>
-                    <input type="number" step="any" name="friends_circle_size" min="0" placeholder="e.g., 2, 5, 12"
-                        required>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>FRIENDS CIRCLE SIZE</label>
+                        <input type="number" step="any" id="friends_circle_size" placeholder="e.g., 6" required>
+                    </div>
+                    <div class="input-group">
+                        <label>POST FREQUENCY <span class="field-desc">(posts per week)</span></label>
+                        <input type="number" step="any" id="post_frequency" placeholder="e.g., 2" required>
+                    </div>
                 </div>
 
-                <!-- social media post frequency -->
-                <div class="input-group">
-                    <label>📱 social media posts <span class="light">(posts / shares per week approx.)</span></label>
-                    <input type="number" step="any" name="post_frequency" min="0" placeholder="0 = lurker, 10+ = active"
-                        required>
-                </div>
-
-                <hr>
-                <button type="button" id="predictBtn">✨ analyze & predict ✨</button>
-                <div class="hint-note" style="text-align:center; margin-top:12px">secure · instant personality insight
-                </div>
+                <button type="submit" id="submitBtn">
+                    <span>Analyze Personality</span>
+                </button>
             </form>
         </div>
+        <footer>
+            Prediction reference: 1 = Extrovert , 0 = Introvert
+        </footer>
     </div>
 
-    <!-- Custom alert component (toast) -->
-    <div id="smartToast" class="custom-toast">
-        <span class="toast-icon" id="toastIcon">🧠</span>
-        <span class="toast-msg" id="toastMessage">prediction ready</span>
-        <button class="toast-close" id="toastCloseBtn" aria-label="close">✕</button>
-    </div>
+    <div id="customAlert" class="custom-alert"></div>
 
     <script>
-        (function () {
-            // DOM elements
-            const form = document.getElementById('predictionForm');
-            const predictBtn = document.getElementById('predictBtn');
-            const toastEl = document.getElementById('smartToast');
-            const toastMessageSpan = document.getElementById('toastMessage');
-            const toastIconSpan = document.getElementById('toastIcon');
-            const toastClose = document.getElementById('toastCloseBtn');
+        // API endpoint configuration
+        // By default it uses relative path '/predict' which works if frontend is served from same origin as FastAPI
+        // For cross-origin or different port, modify BASE_URL. Example: http://localhost:8000/predict
+        const API_ENDPOINT = '/predict';
 
-            // helper: show custom alert (toast)
-            function showAlert(message, isError = false) {
-                // set message & icon style
-                toastMessageSpan.innerText = message;
-                if (isError) {
-                    toastIconSpan.innerHTML = '⚠️';
-                    toastEl.classList.add('error-toast');
-                } else {
-                    toastIconSpan.innerHTML = '🧠';
-                    toastEl.classList.remove('error-toast');
-                }
-                // make visible
-                toastEl.classList.add('show');
+        // Helper to show custom alert with proper styling
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('customAlert');
+            // reset classes
+            alertBox.classList.remove('extrovert', 'introvert', 'error-alert', 'show');
+            // force reflow for smooth transition
+            void alertBox.offsetWidth;
 
-                // auto hide after 4 seconds
-                clearTimeout(window.toastTimeout);
-                window.toastTimeout = setTimeout(() => {
-                    toastEl.classList.remove('show');
-                }, 4200);
+            alertBox.textContent = message;
+
+            if (type === 'extrovert') {
+                alertBox.classList.add('extrovert');
+            } else if (type === 'introvert') {
+                alertBox.classList.add('introvert');
+            } else if (type === 'error') {
+                alertBox.classList.add('error-alert');
             }
 
-            // hide on manual close
-            toastClose.addEventListener('click', () => {
-                toastEl.classList.remove('show');
-                if (window.toastTimeout) clearTimeout(window.toastTimeout);
-            });
+            alertBox.classList.add('show');
 
-            // Helper: collect and validate form data, return FormData or throw error
-            function gatherFormData() {
-                // manual extraction to ensure required radio groups are validated
-                const time_spent_alone = form.querySelector('input[name="time_spent_alone"]').value.trim();
-                const stage_fear_radios = form.querySelectorAll('input[name="stage_fear"]');
-                let stage_fear_value = null;
-                for (let radio of stage_fear_radios) {
-                    if (radio.checked) {
-                        stage_fear_value = radio.value;
-                        break;
-                    }
-                }
-                const social_event_attendance = form.querySelector('input[name="social_event_attendance"]').value.trim();
-                const going_outside = form.querySelector('input[name="going_outside"]').value.trim();
-                const drained_radios = form.querySelectorAll('input[name="drained_after_socializing"]');
-                let drained_value = null;
-                for (let radio of drained_radios) {
-                    if (radio.checked) {
-                        drained_value = radio.value;
-                        break;
-                    }
-                }
-                const friends_circle_size = form.querySelector('input[name="friends_circle_size"]').value.trim();
-                const post_frequency = form.querySelector('input[name="post_frequency"]').value.trim();
+            // auto hide after 3.5 seconds
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 3500);
+        }
 
-                // validation: all fields required
-                if (!time_spent_alone) throw new Error('Please enter hours spent alone.');
-                if (stage_fear_value === null) throw new Error('Please select: nervous when speaking in front of group?');
-                if (!social_event_attendance) throw new Error('Social event attendance is required.');
-                if (!going_outside) throw new Error('Going outside frequency is required.');
-                if (drained_value === null) throw new Error('Please answer: emotionally drained after socializing?');
-                if (!friends_circle_size) throw new Error('Number of close friends is required.');
-                if (!post_frequency) throw new Error('Social media post frequency is required.');
+        // loading state management for button
+        function setLoadingState(isLoading, buttonElement) {
+            if (isLoading) {
+                buttonElement.disabled = true;
+                buttonElement.style.opacity = '0.7';
+                buttonElement.innerHTML = '<span class="loader"></span> Analyzing...';
+            } else {
+                buttonElement.disabled = false;
+                buttonElement.style.opacity = '1';
+                buttonElement.innerHTML = '<span>Analyze Personality</span>';
+            }
+        }
 
-                // numeric sanitization
-                const tAlone = parseFloat(time_spent_alone);
-                const socialEv = parseFloat(social_event_attendance);
-                const goingOut = parseFloat(going_outside);
-                const friendsSize = parseFloat(friends_circle_size);
-                const postFreq = parseFloat(post_frequency);
+        // main prediction handler
+        async function handlePredictionSubmit(event) {
+            event.preventDefault();
 
-                if (isNaN(tAlone)) throw new Error('Alone time must be a number.');
-                if (isNaN(socialEv)) throw new Error('Social events must be a number.');
-                if (isNaN(goingOut)) throw new Error('Going outside score must be a number.');
-                if (isNaN(friendsSize)) throw new Error('Friends circle must be a number.');
-                if (isNaN(postFreq)) throw new Error('Post frequency must be a number.');
+            // get all form values
+            const timeSpentAloneRaw = document.getElementById('time_spent_alone').value.trim();
+            const stageFearValue = document.getElementById('stage_fear').value;
+            const socialEventRaw = document.getElementById('social_event_attendance').value.trim();
+            const goingOutsideRaw = document.getElementById('going_outside').value.trim();
+            const drainedValue = document.getElementById('drained_after_socializing').value;
+            const friendsCircleRaw = document.getElementById('friends_circle_size').value.trim();
+            const postFreqRaw = document.getElementById('post_frequency').value.trim();
 
-                // Build FormData
-                const fd = new FormData();
-                fd.append('time_spent_alone', tAlone);
-                fd.append('stage_fear', stage_fear_value);
-                fd.append('social_event_attendance', socialEv);
-                fd.append('going_outside', goingOut);
-                fd.append('drained_after_socializing', drained_value);
-                fd.append('friends_circle_size', friendsSize);
-                fd.append('post_frequency', postFreq);
-
-                return fd;
+            // validation for selects
+            if (!stageFearValue || !drainedValue) {
+                showAlert('Please select both Stage Fear and Drained After Socializing options.', 'error');
+                return;
             }
 
-            // main prediction request to FastAPI endpoint
-            async function sendPrediction() {
-                let formData;
-                try {
-                    formData = gatherFormData();
-                } catch (validationErr) {
-                    showAlert(validationErr.message, true);
-                    return;
-                }
+            // parse numeric fields
+            const timeSpentAlone = parseFloat(timeSpentAloneRaw);
+            const socialEventAttendance = parseFloat(socialEventRaw);
+            const goingOutside = parseFloat(goingOutsideRaw);
+            const friendsCircleSize = parseFloat(friendsCircleRaw);
+            const postFrequency = parseFloat(postFreqRaw);
 
-                // disable button during request (UX)
-                const originalBtnText = predictBtn.innerHTML;
-                predictBtn.innerHTML = '🔄 analyzing ...';
-                predictBtn.disabled = true;
+            // validation for positive numbers (gt 0)
+            if (isNaN(timeSpentAlone) || timeSpentAlone <= 0) {
+                showAlert('Time spent alone must be a positive number greater than 0.', 'error');
+                return;
+            }
+            if (isNaN(socialEventAttendance) || socialEventAttendance <= 0) {
+                showAlert('Social event attendance must be a positive number greater than 0.', 'error');
+                return;
+            }
+            if (isNaN(goingOutside) || goingOutside <= 0) {
+                showAlert('Going outside value must be a positive number greater than 0.', 'error');
+                return;
+            }
+            if (isNaN(friendsCircleSize) || friendsCircleSize <= 0) {
+                showAlert('Friends circle size must be a positive number greater than 0.', 'error');
+                return;
+            }
+            if (isNaN(postFrequency) || postFrequency <= 0) {
+                showAlert('Post frequency must be a positive number greater than 0.', 'error');
+                return;
+            }
 
-                try {
-                    // FastAPI endpoint (consistent with backend)
-                    const response = await fetch('http://localhost:8000/predict', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json',
+            // build payload matching UserInput schema
+            const requestPayload = {
+                time_spent_alone: timeSpentAlone,
+                stage_fear: stageFearValue,
+                social_event_attendance: socialEventAttendance,
+                going_outside: goingOutside,
+                drained_after_socializing: drainedValue,
+                friends_circle_size: friendsCircleSize,
+                post_frequency: postFrequency
+            };
+
+            const submitButton = document.getElementById('submitBtn');
+            setLoadingState(true, submitButton);
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestPayload)
+                });
+
+                if (!response.ok) {
+                    let errorDetail = `Server responded with status ${response.status}`;
+                    try {
+                        const errorData = await response.json();
+                        if (errorData.detail) {
+                            errorDetail = errorData.detail;
+                        } else if (errorData.message) {
+                            errorDetail = errorData.message;
                         }
-                    });
-
-                    // handle non-ok responses
-                    if (!response.ok) {
-                        let errorDetail = `Server error (${response.status})`;
-                        try {
-                            const errData = await response.json();
-                            if (errData.detail) errorDetail = errData.detail;
-                            else if (errData.message) errorDetail = errData.message;
-                        } catch (e) { /* ignore json parse */ }
-                        throw new Error(errorDetail);
+                    } catch (e) {
+                        // ignore parsing error, keep generic message
                     }
-
-                    const result = await response.json();
-                    // expected response: { prediction: "some personality type" } or { personality: ... }
-                    let predictionText = '';
-                    if (result.prediction) {
-                        predictionText = result.prediction;
-                    } else if (result.personality) {
-                        predictionText = result.personality;
-                    } else if (result.result) {
-                        predictionText = result.result;
-                    } else {
-                        predictionText = JSON.stringify(result); // fallback
-                    }
-
-                    // clean response string
-                    const cleanPrediction = String(predictionText).substring(0, 120);
-                    showAlert(`✨ personality insight: ${cleanPrediction} ✨`, false);
-
-                } catch (err) {
-                    console.error('Prediction API error:', err);
-                    let friendlyMsg = err.message || 'Unable to reach personality service.';
-                    if (friendlyMsg.includes('Failed to fetch') || friendlyMsg.includes('NetworkError')) {
-                        friendlyMsg = '⚠️ Cannot connect to FastAPI backend. Make sure server is running at /predict endpoint.';
-                    }
-                    showAlert(friendlyMsg, true);
-                } finally {
-                    predictBtn.innerHTML = originalBtnText;
-                    predictBtn.disabled = false;
+                    throw new Error(errorDetail);
                 }
+
+                const resultData = await response.json();
+                // parse prediction value: expected format { "prediction": [0] } or { "prediction": 0 } or { "prediction": 1 }
+                let predictionValue = null;
+                if (resultData.prediction !== undefined) {
+                    if (Array.isArray(resultData.prediction) && resultData.prediction.length > 0) {
+                        predictionValue = resultData.prediction[0];
+                    } else if (typeof resultData.prediction === 'number') {
+                        predictionValue = resultData.prediction;
+                    } else if (typeof resultData.prediction === 'string') {
+                        predictionValue = parseInt(resultData.prediction, 10);
+                    } else {
+                        predictionValue = Number(resultData.prediction);
+                    }
+                } else if (resultData.result !== undefined) {
+                    predictionValue = Number(resultData.result);
+                } else if (typeof resultData === 'number') {
+                    predictionValue = resultData;
+                } else {
+                    // fallback: try to find any numeric field
+                    const firstNumber = Object.values(resultData).find(v => typeof v === 'number' || (typeof v === 'string' && !isNaN(parseFloat(v))));
+                    if (firstNumber !== undefined) {
+                        predictionValue = parseFloat(firstNumber);
+                    } else {
+                        throw new Error('Invalid response format: missing prediction field');
+                    }
+                }
+
+                const numericPrediction = Number(predictionValue);
+                let alertMessage = '';
+                let alertType = '';
+
+                if (numericPrediction === 1) {
+                    alertMessage = 'RESULT: EXTROVERT (1) - High social engagement and outward energy.';
+                    alertType = 'extrovert';
+                } else if (numericPrediction === 0) {
+                    alertMessage = 'RESULT: INTROVERT (0) - Preference for solitude and deep focus.';
+                    alertType = 'introvert';
+                } else {
+                    alertMessage = `Unexpected prediction value: ${numericPrediction}. Expected 0 or 1.`;
+                    alertType = 'error';
+                }
+
+                showAlert(alertMessage, alertType);
+
+            } catch (error) {
+                console.error('Prediction API call failed:', error);
+                let userFriendlyMsg = `Prediction failed: ${error.message}`;
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    userFriendlyMsg = 'Cannot connect to the prediction server. Please ensure the backend is running at ' + API_ENDPOINT + ' and CORS is configured correctly.';
+                }
+                showAlert(userFriendlyMsg, 'error');
+            } finally {
+                setLoadingState(false, submitButton);
             }
+        }
 
-            // add event listener to button
-            predictBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                sendPrediction();
-            });
+        // attach submit handler to form
+        const formElement = document.getElementById('predictionForm');
+        formElement.addEventListener('submit', handlePredictionSubmit);
 
-            // optional: support Enter key inside any input? But we prevent default form submit to avoid page reload.
-            // intercept any accidental form submit
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                sendPrediction();
-            });
+        // Optional: enforce positive numbers on input (client side friendly)
+        const positiveNumberFields = ['time_spent_alone', 'social_event_attendance', 'going_outside', 'friends_circle_size', 'post_frequency'];
+        positiveNumberFields.forEach(fieldId => {
+            const inputField = document.getElementById(fieldId);
+            if (inputField) {
+                inputField.addEventListener('input', function (e) {
+                    let value = this.value.trim();
+                    if (value === '') return;
+                    let numValue = parseFloat(value);
+                    if (!isNaN(numValue) && numValue <= 0) {
+                        // clear if user enters zero or negative to avoid confusion but allow them to fix
+                        if (numValue === 0) {
+                            this.value = '';
+                        }
+                        if (numValue < 0) {
+                            this.value = '';
+                        }
+                    }
+                    // also prevent entering negative sign or invalid strings partially
+                    if (value.startsWith('-')) {
+                        this.value = '';
+                    }
+                });
 
-            // quick style: improve initial load
-            // add floating subtle animation to toast init
-            console.log('✨ Personality predictor ready — POST to /predict');
-        })();
+                // on blur, if value is invalid negative/zero, clear and add hint (no alert, just ux)
+                inputField.addEventListener('blur', function () {
+                    let val = parseFloat(this.value);
+                    if (!isNaN(val) && val <= 0) {
+                        this.value = '';
+                    } else if (this.value === '0') {
+                        this.value = '';
+                    }
+                });
+            }
+        });
+
+        // small utility: make selects not empty by default but still require selection
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            if (select.options.length > 1 && !select.value) {
+                // do nothing - user must pick
+            }
+        });
+
+        // optional: set initial placeholder style consistency
+        const style = document.createElement('style');
+        style.textContent = `
+    input:invalid, select:invalid {
+      border-color: #d9c5c5;
+    }
+  `;
+        document.head.appendChild(style);
     </script>
 </body>
 
